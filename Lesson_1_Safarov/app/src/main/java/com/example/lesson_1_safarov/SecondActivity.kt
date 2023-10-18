@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lesson_1_safarov.databinding.ActivitySecondBinding
 import kotlin.random.Random
+import kotlin.random.nextULong
 
 class SecondActivity : AppCompatActivity() {
 
@@ -19,7 +20,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivitySecondBinding
-    private var students: HashMap<Long, Student> = hashMapOf()
+    private val students: HashMap<ULong, Student> = hashMapOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +39,14 @@ class SecondActivity : AppCompatActivity() {
                 if (rawStudent.size != 4) return@setOnKeyListener false
 
                 val currentStudent = Student(
-                    Random.nextLong(),
+                    Random.nextULong(),
                     rawStudent[NAME_STUDENT_INDEX],
                     rawStudent[SURNAME_STUDENT_INDEX],
                     rawStudent[GRADE_STUDENT_INDEX],
                     rawStudent[BIRTHDAY_STUDENT_INDEX]
                 )
                 students[currentStudent.id] = currentStudent
+                binding.studentEdittext.text.clear()
                 return@setOnKeyListener true
             }
             false

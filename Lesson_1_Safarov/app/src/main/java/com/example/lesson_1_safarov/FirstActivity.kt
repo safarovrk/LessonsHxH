@@ -26,6 +26,7 @@ class FirstActivity : AppCompatActivity() {
     private fun setListeners() {
         binding.saveNameButton.setOnClickListener {
             names.add(binding.nameEdittext.text.toString())
+            binding.nameEdittext.text.clear()
         }
         binding.showNamesButton.setOnClickListener {
             binding.namesTextview.text = names.joinToString(separator = "\n") { it }
