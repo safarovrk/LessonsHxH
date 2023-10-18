@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lesson_1_Safarov</string>
+    <string name="first_activity">First activity</string>
+    <string name="second_activity">Second activity</string>
+    <string name="name">Name</string>
+    <string name="save_name">Save name</string>
+    <string name="show_names">Show names</string>
+    <string name="student">Name Surname Grade BirthdayYear</string>
+    <string name="show_students">Show students</string>
+</resources>
