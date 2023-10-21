@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_first_task"
+    app:startDestination="@id/senderFragment">
+
+    <fragment
+        android:id="@+id/senderFragment"
+        android:name="com.example.lesson_2_safarov.first_task.SenderFragment"
+        android:label="SenderFragment" >
+        <action
+            android:id="@+id/action_senderFragment_to_recipientFragment"
+            app:destination="@id/recipientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipientFragment"
+        android:name="com.example.lesson_2_safarov.first_task.RecipientFragment"
+        android:label="RecipientFragment" >
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </fragment>
+</navigation>
