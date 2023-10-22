@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.lesson_2_safarov.databinding.ActivityBottomNavigationBinding
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -24,22 +25,19 @@ class BottomNavigationActivity : AppCompatActivity() {
 
     private fun setListeners() {
         binding.firstFragmentButton.setOnClickListener {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(binding.fragmentContainer.id, FirstFragment::class.java, bundleOf())
-                .commit()
+            supportFragmentManager.commit {
+                replace<FirstFragment>(binding.fragmentContainer.id)
+            }
         }
         binding.secondFragmentButton.setOnClickListener {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(binding.fragmentContainer.id, SecondFragment::class.java, bundleOf())
-                .commit()
+            supportFragmentManager.commit {
+                replace<SecondFragment>(binding.fragmentContainer.id)
+            }
         }
         binding.thirdFragmentButton.setOnClickListener {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(binding.fragmentContainer.id, ThirdFragment::class.java, bundleOf())
-                .commit()
+            supportFragmentManager.commit {
+                replace<ThirdFragment>(binding.fragmentContainer.id)
+            }
         }
     }
 }
