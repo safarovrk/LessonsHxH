@@ -27,8 +27,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".second_task.BottomNavigationActivity"
-            android:screenOrientation="portrait">
+            android:name=".second_task.BottomNavigationActivity">
         </activity>
         <activity
             android:name=".third_task.LifecycleTestActivity">
