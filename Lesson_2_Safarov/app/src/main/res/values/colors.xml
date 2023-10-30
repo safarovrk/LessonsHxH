@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FFFF0000</color>
     <color name="blue">#FF0000FF</color>
+    <color name="green">#FF00FF00</color>
+    <color name="quatrain_color">#FF000000</color>
+    <color name="orange">#FFD46610</color>
 </resources>

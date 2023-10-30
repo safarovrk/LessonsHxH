@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_task">Первая задача</string>
+    <string name="second_task">Вторая задача</string>
+    <string name="third_task">Третья задача</string>
+    <string name="message">Сообщение</string>
+    <string name="next">Далее</string>
+    <string name="save">Сохранить</string>
+    <string name="sorry_there_is_nothing">Если жизнь тебя обманет,\nНе печалься, не сердись!\nВ день уныния смирись:\nДень веселья, верь, настанет.</string>
+</resources>

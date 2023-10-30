@@ -1,12 +1,16 @@
 <resources>
-    <string name="app_name">Lesson_2_Safarov</string>
+    <string name="app_name" translatable="false">Lesson_2_Safarov</string>
     <string name="first_task">First task</string>
     <string name="second_task">Second task</string>
     <string name="third_task">Third task</string>
     <string name="message">Message</string>
     <string name="next">Next</string>
     <string name="save">Save</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="sorry_there_is_nothing">Sorry, there is nothing</string>
+    <string name="pushkin_signature" translatable="false">pushkin_signature</string>
+    <string name="button_one" translatable="false">Кнопка 1</string>
+    <string name="rectangles" translatable="false">rectangles</string>
 </resources>

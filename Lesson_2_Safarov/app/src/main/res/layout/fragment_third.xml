@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_3"
+        android:background="@drawable/button_selector"
+        android:text="@string/button_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="64sp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
