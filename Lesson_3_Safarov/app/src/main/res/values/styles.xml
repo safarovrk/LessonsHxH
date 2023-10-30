@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance" parent="android:TextAppearance" />
+
+    <style name="TextAppearance.H1">
+        <item name="android:textSize">@dimen/text_h1_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_h1_line</item>
+    </style>
+
+    <style name="TextAppearance.TextField">
+        <item name="android:textSize">@dimen/text_input_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_input_line</item>
+    </style>
+
+    <style name="TextAppearance.TextField.Hint">
+        <item name="android:textSize">@dimen/text_input_hint_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_input_hint_line</item>
+    </style>
+
+    <style name="TextAppearance.Button">
+        <item name="android:textColor">?attr/colorSurface</item>
+        <item name="android:textSize">@dimen/text_button_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_button_line</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.Lesson_3_Safarov.ShapeAppearanceTextInputLayout"
+        parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">@dimen/corner_input_radius</item>
+    </style>
+
+    <style name="Theme.Lesson_3_Safarov.ShapeAppearanceButton"
+        parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">@dimen/corner_button_radius</item>
+    </style>
+</resources>

@@ -1,0 +1,44 @@
+<resources>
+
+    <style name="Base.V27.Theme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/black_20pc</item>
+    </style>
+
+    <style name="Theme.Lesson_3_Safarov" parent="Base.V27.Theme">
+        <item name="android:statusBarColor">@color/black_20pc</item>
+        <item name="colorPrimary">@color/smalt</item>
+        <item name="textInputStyle">@style/Theme.Lesson_3_Safarov.TextInputLayout</item>
+        <item name="materialButtonStyle">@style/Theme.Lesson_3_Safarov.Button</item>
+    </style>
+
+    <style name="Theme.Lesson_3_Safarov.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/seashell</item>
+        <item name="boxStrokeColor">@color/text_field_box_stroke_color</item>
+        <item name="shapeAppearance">
+            @style/Theme.Lesson_3_Safarov.ShapeAppearanceTextInputLayout
+        </item>
+        <item name="android:textAppearance">
+            @style/TextAppearance.TextField
+        </item>
+        <item name="hintTextAppearance">
+            @style/TextAppearance.TextField.Hint
+        </item>
+        <item name="android:textColorHint">@color/silver_chalice</item>
+        <item name="hintTextColor">@color/silver_chalice</item>
+        <item name="endIconTint">@color/black</item>
+        <item name="errorTextColor">@color/error</item>
+        <item name="boxStrokeErrorColor">@color/error</item>
+        <item name="errorIconDrawable">@null</item>
+    </style>
+
+    <style name="Theme.Lesson_3_Safarov.Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="shapeAppearance">
+            @style/Theme.Lesson_3_Safarov.ShapeAppearanceButton
+        </item>
+
+        <item name="paddingStart">@dimen/padding_button_horizontal</item>
+        <item name="paddingEnd">@dimen/padding_button_horizontal</item>
+        <item name="android:paddingTop">@dimen/padding_button_vertical</item>
+        <item name="android:paddingBottom">@dimen/padding_button_vertical</item>
+    </style>
+</resources>
