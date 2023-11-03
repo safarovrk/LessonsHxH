@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Lesson_3_Safarov</string>
+    <string name="sing_in">Войти</string>
+    <string name="sing_in_title">@string/sing_in</string>
+    <string name="sing_in_login_hint">Логин</string>
+    <string name="sing_in_password_hint">Пароль</string>
+    <string name="sing_in_action">@string/sing_in</string>
+    <string name="input_empty_error">Поле заполнено неверно</string>
+    <string name="unknown_error">Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже.</string>
+</resources>
