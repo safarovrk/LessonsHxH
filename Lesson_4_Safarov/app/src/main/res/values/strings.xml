@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Lesson_4_Safarov</string>
+    <string name="string_for_observe">String for observe</string>
+    <string name="save_string">Save string</string>
+    <string name="place_for_your_string">Place for your string</string>
+</resources>
