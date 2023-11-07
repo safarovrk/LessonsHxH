@@ -1,5 +1,7 @@
 package com.example.lesson_5_safavor
 
+import android.animation.Animator
+import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
@@ -23,6 +25,8 @@ class ChartView @JvmOverloads constructor(
         const val COLUMN_TEXT_OFFSET = 32f
         const val TEXT_OFFSET = 16f
         const val ASPECT_RATIO = 360 / 150
+        const val ANIMATION_DURATION = 300L
+        const val ANIMATION_DELAY = 30L
     }
 
     private var textColor = ContextCompat.getColor(context, R.color.black)
@@ -52,8 +56,27 @@ class ChartView @JvmOverloads constructor(
     private var _chartDataList: ArrayList<Pair<String, Int>>? = arrayListOf()
     private val chartDataList get() = _chartDataList!!
 
+    // Коллекции для хранения значений и соответствующих им аниматоров на каждый столбец
+    private var percentMultipliers: ArrayList<Float> = arrayListOf()
+    private var percentAnimators: MutableList<ValueAnimator> = arrayListOf()
+    private var animatorSet = AnimatorSet()
+
     fun setData(data: ArrayList<Pair<String, Int>>) {
         _chartDataList = data
+
+        for (index in chartDataList.indices) {
+            percentMultipliers.add(0f)
+            percentAnimators.add(
+                ValueAnimator.ofFloat(0f, 1f).apply {
+                    duration = ANIMATION_DURATION
+                    startDelay = index * ANIMATION_DELAY
+                    addUpdateListener {
+                        percentMultipliers[index] = (it.animatedValue as Float)
+                        invalidate()
+                    }
+                }
+            )
+        }
         invalidate()
     }
 
@@ -72,24 +95,16 @@ class ChartView @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    private var percentMultiplier = 1f
 
     private fun animateColumns() {
-        animation.start()
+        animatorSet.playTogether(percentAnimators as List<Animator>)
+        animatorSet.start()
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         _chartDataList = null
-        animation.cancel()
-    }
-
-    private val animation = ValueAnimator.ofFloat(0f, 1f).apply {
-        duration = 1000
-        addUpdateListener {
-            percentMultiplier = (it.animatedValue as Float)
-            invalidate()
-        }
+        animatorSet.cancel()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -129,7 +144,7 @@ class ChartView @JvmOverloads constructor(
 
                 // Высота столбца для текущего значения
                 val currentColumnHeight =
-                    (columnHeight * columnPercentOfHeight * percentMultiplier) + START_COLUMN_HEIGHT
+                    (columnHeight * columnPercentOfHeight * percentMultipliers[index]) + START_COLUMN_HEIGHT
 
                 canvas.drawRoundRect(
                     currentColumnWidth * index + currentColumnWidth / 2 - COLUMN_LINE_WIDTH / 2,
