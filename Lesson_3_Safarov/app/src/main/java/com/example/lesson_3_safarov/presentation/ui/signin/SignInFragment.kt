@@ -1,11 +1,14 @@
 package com.example.lesson_3_safarov.presentation.ui.signin
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -38,6 +41,14 @@ class SignInFragment : Fragment() {
         binding.buttonContainer.setOnClickListener {
             signInClicked()
         }
+        binding.textPassword.addTextChangedListener {
+            binding.layoutPassword.error = ""
+            binding.layoutPassword.isErrorEnabled = false
+        }
+        binding.textLogin.addTextChangedListener {
+            binding.layoutLogin.error = ""
+            binding.layoutLogin.isErrorEnabled = false
+        }
         binding.textPassword.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE
                 || event.action == KeyEvent.ACTION_DOWN
@@ -49,6 +60,11 @@ class SignInFragment : Fragment() {
     }
 
     private fun signInClicked() {
+        val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+        binding.layoutLogin.clearFocus()
+        binding.layoutPassword.clearFocus()
+
         var isFieldsValid = true
 
         if (binding.textLogin.text.isNullOrEmpty()) {
