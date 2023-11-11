@@ -61,37 +61,19 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <FrameLayout
-        android:id="@+id/buttonContainer"
+    <com.example.lesson_3_safarov.presentation.utils.ProgressButtonView
+        android:id="@+id/progressButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_300"
         android:background="@drawable/indicator_button_ripple"
         android:clickable="true"
         android:focusable="true"
+        app:text="@string/sing_in"
+        app:textAppearance="@style/TextAppearance.Button"
+        app:indicatorColor="@color/indicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutPassword">
-
-        <TextView
-            android:id="@+id/buttonText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/sing_in_action"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Button" />
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/circularProgressSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="invisible"
-            app:indicatorColor="@color/white"
-            app:indicatorSize="@dimen/button_progress_size" />
-
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/layoutPassword"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
