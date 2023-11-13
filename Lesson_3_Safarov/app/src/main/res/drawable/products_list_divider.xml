@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <size android:height="1dp" />
-    <solid android:color="@color/seashell" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="?attr/colorSurface" />
+        </shape>
+    </item>
+    <item
+        android:left="@dimen/normal_100"
+        android:right="@dimen/normal_100">
+        <shape>
+            <size android:height="1dp" />
+            <solid android:color="@color/seashell" />
+        </shape>
+    </item>
+</layer-list>
+

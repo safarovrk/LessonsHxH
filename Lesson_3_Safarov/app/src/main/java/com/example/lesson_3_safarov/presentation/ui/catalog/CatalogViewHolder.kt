@@ -1,6 +1,5 @@
 package com.example.lesson_3_safarov.presentation.ui.catalog
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,12 +33,13 @@ class CatalogViewHolder private constructor(private val binding: CatalogListItem
         binding.productPrice.text = item.product.price
         binding.buyButton.setOnClickListener { clickListener(item.product) }
 
+        val cornerRadius = this.itemView.resources.getDimension(R.dimen.corner_radius).toInt()
         Glide.with(binding.productImage)
             .load(item.product.preview)
             .transform(
                 MultiTransformation(
                     CenterCrop(),
-                    RoundedCorners(8 * Resources.getSystem().displayMetrics.density.toInt())
+                    RoundedCorners(cornerRadius)
                 )
             )
             .placeholder(R.drawable.dallas_cowboys)

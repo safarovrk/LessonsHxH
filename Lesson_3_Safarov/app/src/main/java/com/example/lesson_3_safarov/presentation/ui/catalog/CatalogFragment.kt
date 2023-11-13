@@ -85,7 +85,7 @@ class CatalogFragment : Fragment() {
                             ProductItem(
                                 product
                             ) {
-                                // Будет выполняться при клике на кнопку купить
+                                //TODO Будет выполняться при клике на кнопку купить
                             }
                         )
                     }
