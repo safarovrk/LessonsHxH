@@ -1,6 +1,5 @@
-package com.example.lesson_3_safarov.domain.signin
+package com.example.lesson_3_safarov.domain.signin.usecase
 
-import android.util.Log
 import com.example.lesson_3_safarov.data.repository.LessonRepository
 import com.example.lesson_3_safarov.data.repository.PreferenceStorage
 import com.example.lesson_3_safarov.data.responsemodel.ResponseLogin

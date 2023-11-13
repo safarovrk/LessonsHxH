@@ -10,7 +10,8 @@
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_catalogFragment"
-            app:destination="@id/catalogFragment" />
+            app:destination="@id/catalogFragment"
+            app:popUpTo="@id/nav_graph"/>
     </fragment>
     <fragment
         android:id="@+id/catalogFragment"

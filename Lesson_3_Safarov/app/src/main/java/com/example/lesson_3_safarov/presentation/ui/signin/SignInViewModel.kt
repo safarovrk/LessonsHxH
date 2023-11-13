@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lesson_3_safarov.data.responsemodel.ResponseLogin
 import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
-import com.example.lesson_3_safarov.domain.signin.SignInUseCase
+import com.example.lesson_3_safarov.domain.signin.usecase.SignInUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

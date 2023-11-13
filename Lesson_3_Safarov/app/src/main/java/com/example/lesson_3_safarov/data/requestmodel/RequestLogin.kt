@@ -1,4 +1,4 @@
-package com.example.lesson6.data.requestmodel
+package com.example.lesson_3_safarov.data.requestmodel
 
 import com.google.gson.annotations.SerializedName
 
