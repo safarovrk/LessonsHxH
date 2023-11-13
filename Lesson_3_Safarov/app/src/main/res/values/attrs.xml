@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressButtonView">
+        <attr name="text" format="string"/>
+        <attr name="textAppearance" format="reference"/>
+        <attr name="indicatorColor" format="color"/>
+    </declare-styleable>
+</resources>

@@ -2,6 +2,7 @@
 
     <style name="Base.V27.Theme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/black_20pc</item>
+        <item name="android:navigationBarColor">@color/white_50pc</item>
     </style>
 
     <style name="Theme.Lesson_3_Safarov" parent="Base.V27.Theme">
@@ -9,6 +10,7 @@
         <item name="colorPrimary">@color/smalt</item>
         <item name="textInputStyle">@style/Theme.Lesson_3_Safarov.TextInputLayout</item>
         <item name="materialButtonStyle">@style/Theme.Lesson_3_Safarov.Button</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
     <style name="Theme.Lesson_3_Safarov.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

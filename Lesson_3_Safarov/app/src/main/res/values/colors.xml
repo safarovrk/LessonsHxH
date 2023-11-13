@@ -9,4 +9,8 @@
     <color name="silver_chalice">#FFA4A4A4</color>
     <color name="error">#FFED4337</color>
     <color name="transparent">#00000000</color>
+    <color name="indicator">#FFFFFFFF</color>
+    <color name="background">#FFF4F4F4</color>
+    <color name="secondary">#FF041E42</color>
+    <color name="status_bar">#FF002A76</color>
 </resources>
