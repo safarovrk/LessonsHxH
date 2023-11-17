@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson_3_safarov.R
 import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
 import com.example.lesson_3_safarov.databinding.FragmentCatalogBinding
+import com.example.lesson_3_safarov.presentation.exception.getError
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -94,7 +95,7 @@ class CatalogFragment : Fragment() {
                 }
 
                 is ResponseStates.Failure -> {
-                    binding.unexpectedErrorDescription.text = state.e.message
+                    binding.unexpectedErrorDescription.text = state.e.getError()
                     binding.viewFlipper.displayedChild = VIEW_FLIPPER_ERROR
                 }
 
