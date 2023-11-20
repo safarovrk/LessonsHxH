@@ -1,10 +1,11 @@
 package com.example.lesson_3_safarov.data.responsemodel
 
-import com.example.lesson_3_safarov.domain.catalog.Product
 import com.google.gson.annotations.SerializedName
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
+import com.example.lesson_3_safarov.domain.catalog.Product as CatalogProduct
+import com.example.lesson_3_safarov.domain.product.Product as ProductProduct
 
 data class ResponseProduct(
     @SerializedName("id") val id: String,
@@ -19,18 +20,35 @@ data class ResponseProduct(
     @SerializedName("details") val details: List<String>
 )
 
-fun ResponseProduct.toDomain(): Product {
+fun ResponseProduct.toCatalogDomain(): CatalogProduct {
+    return CatalogProduct(
+        id = this.id,
+        title = this.title,
+        department = this.department,
+        price = this.price.formatPrice(),
+        preview = this.preview
+    )
+}
+
+fun ResponseProduct.toProductDomain(): ProductProduct {
+    return ProductProduct(
+        id = id,
+        title = title,
+        department = department,
+        price = price.formatPrice(),
+        badge = badge.map { it.toDomain() },
+        images = images,
+        sizes = sizes.map { it.toDomain() },
+        description = description,
+        details = details,
+    )
+}
+
+fun Int.formatPrice(): String {
     val decimalFormat = DecimalFormat("#,###")
     val symbols = DecimalFormatSymbols(Locale.getDefault())
     symbols.groupingSeparator = ' '
     decimalFormat.decimalFormatSymbols = symbols
-
-    return Product(
-        id = this.id,
-        title = this.title,
-        department = this.department,
-        price = decimalFormat.format(this.price) + " ₽",
-        preview = this.preview
-    )
+    return decimalFormat.format(this) + " ₽"
 }
 

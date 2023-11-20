@@ -7,6 +7,10 @@
         <item name="android:lineSpacingExtra">@dimen/text_h1_line</item>
     </style>
 
+    <style name="TextAppearance.H3">
+        <item name="android:textSize">@dimen/text_primary_title_size</item>
+    </style>
+
     <style name="TextAppearance.Primary">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_primary_size</item>
@@ -19,11 +23,21 @@
         <item name="android:lineSpacingExtra">@dimen/text_secondary_line</item>
     </style>
 
+    <style name="TextAppearance.Secondary.Details">
+        <item name="android:textColor">@color/silver_chalice</item>
+        <item name="android:textSize">@dimen/text_secondary_details_size</item>
+        <item name="android:lineSpacingExtra">@dimen/text_secondary_details_line</item>
+    </style>
+
     <style name="TextAppearance.Secondary.Title">
         <item name="android:textColor">@color/silver_chalice</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/text_secondary_title_size</item>
         <item name="android:lineSpacingExtra">@dimen/text_secondary_title_line</item>
+    </style>
+
+    <style name="TextAppearance.Primary.Title">
+        <item name="android:textSize">@dimen/text_product_title_size</item>
     </style>
 
     <style name="TextAppearance.TextField">

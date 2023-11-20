@@ -11,6 +11,7 @@
         <item name="textInputStyle">@style/Theme.Lesson_3_Safarov.TextInputLayout</item>
         <item name="materialButtonStyle">@style/Theme.Lesson_3_Safarov.Button</item>
         <item name="android:windowBackground">@color/background</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Lesson_3_Safarov.BottomSheetDialog</item>
     </style>
 
     <style name="Theme.Lesson_3_Safarov.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -42,5 +43,16 @@
         <item name="paddingEnd">@dimen/padding_button_horizontal</item>
         <item name="android:paddingTop">@dimen/padding_button_vertical</item>
         <item name="android:paddingBottom">@dimen/padding_button_vertical</item>
+    </style>
+    
+    <style name="Theme.Lesson_3_Safarov.BottomSheetDialog"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="BottomSheetStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_corner_bottom_sheet</item>
     </style>
 </resources>
