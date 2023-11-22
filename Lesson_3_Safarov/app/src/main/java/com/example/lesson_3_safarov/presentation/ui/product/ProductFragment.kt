@@ -76,9 +76,9 @@ class ProductFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.imagesRecyclerView.adapter = adapter
+        binding.productLayout.imagesRecyclerView.adapter = adapter
         // Отключает анимацию "мигания" при обновлении элементов
-        binding.imagesRecyclerView.itemAnimator = null
+        binding.productLayout.imagesRecyclerView.itemAnimator = null
         setListeners()
         setObservers()
         setStateObserver()
@@ -86,7 +86,7 @@ class ProductFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.currentSelectedSize.observe(viewLifecycleOwner) {
-            binding.sizeText.setText(it)
+            binding.productLayout.sizeText.setText(it)
         }
     }
 
@@ -97,7 +97,7 @@ class ProductFragment : Fragment() {
         binding.materialToolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        binding.sizeText.setOnClickListener {
+        binding.productLayout.sizeText.setOnClickListener {
             findNavController().navigate(
                 ProductFragmentDirections.actionProductFragmentToSizeBottomSheetFragment(
                     (viewModel.productState.value as ResponseStates.Success<Product>)
@@ -135,7 +135,7 @@ class ProductFragment : Fragment() {
         val cornerRadius = resources.getDimension(R.dimen.corner_radius_secondary).toInt()
 
         // Загрузка основного изображения
-        Glide.with(binding.productFullImage)
+        Glide.with(binding.productLayout.productFullImage)
             .load(product.images[0])
             .transform(
                 MultiTransformation(
@@ -144,7 +144,7 @@ class ProductFragment : Fragment() {
                 )
             )
             .placeholder(R.drawable.placeholder_insets)
-            .into(binding.productFullImage)
+            .into(binding.productLayout.productFullImage)
 
         // Загрузка и добавление в recyclerView всех доступных изображений
         val list = mutableListOf<ImageItem>()
@@ -153,7 +153,7 @@ class ProductFragment : Fragment() {
                 ImageItem(
                     imageUlr,
                     itemClickListener = {
-                        Glide.with(binding.productFullImage)
+                        Glide.with(binding.productLayout.productFullImage)
                             .load(it)
                             .transform(
                                 MultiTransformation(
@@ -162,7 +162,7 @@ class ProductFragment : Fragment() {
                                 )
                             )
                             .placeholder(R.drawable.placeholder_insets)
-                            .into(binding.productFullImage)
+                            .into(binding.productLayout.productFullImage)
                     },
                     isFocused = false
                 )
@@ -175,7 +175,7 @@ class ProductFragment : Fragment() {
                 ImageItem(
                     "",
                     itemClickListener = {
-                        Glide.with(binding.productFullImage)
+                        Glide.with(binding.productLayout.productFullImage)
                             .load(it)
                             .transform(
                                 MultiTransformation(
@@ -184,7 +184,7 @@ class ProductFragment : Fragment() {
                                 )
                             )
                             .placeholder(R.drawable.placeholder_insets)
-                            .into(binding.productFullImage)
+                            .into(binding.productLayout.productFullImage)
                     },
                     isFocused = false
                 )
@@ -193,13 +193,13 @@ class ProductFragment : Fragment() {
         list[0].isFocused = true
         adapter.submitList(list)
 
-        binding.priceText.text = product.price
-        binding.titleText.text = product.title
-        binding.badgeText.text = product.badge[0].value
-        binding.badgeText.backgroundTintList =
+        binding.productLayout.priceText.text = product.price
+        binding.productLayout.titleText.text = product.title
+        binding.productLayout.badgeText.text = product.badge[0].value
+        binding.productLayout.badgeText.backgroundTintList =
             ColorStateList.valueOf(Color.parseColor(product.badge[0].color))
-        binding.descriptionText.text = product.description
-        binding.countryText.text = product.department
+        binding.productLayout.descriptionText.text = product.description
+        binding.productLayout.countryText.text = product.department
 
         // Создание маркированного списка деталей
         product.details.forEach {
@@ -230,7 +230,7 @@ class ProductFragment : Fragment() {
 
             textView.layoutParams = layoutParams
 
-            binding.detailsContainer.addView(textView)
+            binding.productLayout.detailsContainer.addView(textView)
         }
     }
 
