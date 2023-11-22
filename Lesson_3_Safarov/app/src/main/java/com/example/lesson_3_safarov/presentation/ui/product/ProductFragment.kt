@@ -5,14 +5,14 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.BulletSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.fragment.app.setFragmentResultListener
@@ -29,7 +29,6 @@ import com.example.lesson_3_safarov.databinding.FragmentProductBinding
 import com.example.lesson_3_safarov.domain.product.Product
 import com.example.lesson_3_safarov.presentation.exception.getError
 import com.example.lesson_3_safarov.presentation.ui.product.size.SizeBottomSheetFragment
-import com.example.lesson_3_safarov.presentation.utils.setTextAppearanceCompat
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -202,6 +201,7 @@ class ProductFragment : Fragment() {
         binding.productLayout.countryText.text = product.department
 
         // Создание маркированного списка деталей
+        val stringBuilder = SpannableStringBuilder()
         product.details.forEach {
             val spanString = SpannableString(it)
             spanString.setSpan(
@@ -210,28 +210,9 @@ class ProductFragment : Fragment() {
                 it.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-            val textView = TextView(requireContext())
-            textView.text = spanString
-
-            requireContext().setTextAppearanceCompat(
-                textView,
-                R.style.TextAppearance_Secondary_Details
-            )
-
-            val layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.setMargins(
-                resources.getDimensionPixelSize(R.dimen.normal_50),
-                resources.getDimensionPixelSize(R.dimen.normal_25),
-                0,
-                0)
-
-            textView.layoutParams = layoutParams
-
-            binding.productLayout.detailsContainer.addView(textView)
+            stringBuilder.appendLine(spanString)
         }
+        binding.productLayout.detailsText.text = SpannableString(stringBuilder.toSpannable())
     }
 
     override fun onDestroy() {

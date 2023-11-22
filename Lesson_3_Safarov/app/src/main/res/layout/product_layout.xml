@@ -126,12 +126,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/descriptionText" />
 
-            <LinearLayout
-                android:id="@+id/detailsContainer"
+            <TextView
+                android:id="@+id/detailsText"
+                style="@style/TextAppearance.Secondary.Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_50"
                 android:layout_marginTop="@dimen/normal_100"
-                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/details_divider" />
