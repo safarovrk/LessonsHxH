@@ -14,4 +14,8 @@
     <string name="dallas_cowboys_content_description">dallas_cowboys_content_description</string>
     <string name="buy">Купить</string>
     <string name="product_image_content_description">product_image_content_description</string>
+    <string name="size">Размер</string>
+    <string name="product_image_preview_content_description">product_image_preview_content_description</string>
+    <string name="buy_now">Купить сейчас</string>
+    <string name="product_full_image_content_description">product_full_image_content_description</string>
 </resources>

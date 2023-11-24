@@ -3,7 +3,6 @@ package com.example.lesson_3_safarov.presentation.ui.signin
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -15,18 +14,16 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.lesson_3_safarov.R
 import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
 import com.example.lesson_3_safarov.databinding.FragmentSignInBinding
+import com.example.lesson_3_safarov.presentation.exception.getError
 import com.example.lesson_3_safarov.presentation.utils.SnackbarEvents
 import com.example.lesson_3_safarov.presentation.utils.showStylizedSnackbar
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -63,23 +60,23 @@ class SignInFragment : Fragment() {
         viewModel.signInState.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is ResponseStates.Success -> {
-                    binding.progressButton.isLoading = false
+                    binding.progressButton.setStateLoading()
                     navigateToCatalog()
                 }
                 is ResponseStates.Failure -> {
-                    binding.progressButton.isLoading = false
-                    val snackbar = Snackbar.make(binding.root, state.e.message.toString(), Snackbar.LENGTH_LONG)
+                    binding.progressButton.setStateData()
+                    val snackbar = Snackbar.make(binding.root, state.e.getError().toString(), Snackbar.LENGTH_LONG)
                     requireContext().showStylizedSnackbar(snackbar, SnackbarEvents.ErrorEvent)
                 }
                 is ResponseStates.Loading -> {
-                    binding.progressButton.isLoading = true
+                    binding.progressButton.setStateLoading()
                 }
             }
         }
     }
 
     private fun setListeners() {
-        binding.progressButton.setOnClickListener {
+        binding.progressButton.findViewById<MaterialButton>(R.id.buttonLoadable).setOnClickListener {
             signInClicked()
         }
         binding.textPassword.addTextChangedListener {

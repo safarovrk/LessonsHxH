@@ -9,11 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson_3_safarov.R
 import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
 import com.example.lesson_3_safarov.databinding.FragmentCatalogBinding
+import com.example.lesson_3_safarov.domain.catalog.Product
+import com.example.lesson_3_safarov.presentation.exception.getError
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -83,10 +86,14 @@ class CatalogFragment : Fragment() {
                     state.data.forEach { product ->
                         list.add(
                             ProductItem(
-                                product
-                            ) {
-                                //TODO Будет выполняться при клике на кнопку купить
-                            }
+                                product,
+                                buttonClickListener = {
+                                    /*TODO Будет выполняться при клике на кнопку купить*/
+                                },
+                                itemClickListener = {
+                                    navigateToProduct(it)
+                                }
+                            )
                         )
                     }
                     adapter.submitList(list)
@@ -94,7 +101,7 @@ class CatalogFragment : Fragment() {
                 }
 
                 is ResponseStates.Failure -> {
-                    binding.unexpectedErrorDescription.text = state.e.message
+                    binding.unexpectedErrorDescription.text = state.e.getError()
                     binding.viewFlipper.displayedChild = VIEW_FLIPPER_ERROR
                 }
 
@@ -103,6 +110,14 @@ class CatalogFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun navigateToProduct(product: Product) {
+        findNavController().navigate(
+            CatalogFragmentDirections.actionCatalogFragmentToProductFragment(
+                product.id, product.title
+            )
+        )
     }
 
     override fun onDestroy() {

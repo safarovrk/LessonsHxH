@@ -31,6 +31,6 @@ class CatalogAdapter @Inject constructor() : RecyclerView.Adapter<CatalogViewHol
     override fun getItemCount() = differ.currentList.size
 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        holder.bind(differ.currentList[position], differ.currentList[position].clickListener)
+        holder.bind(differ.currentList[position])
     }
 }

@@ -13,7 +13,8 @@ import com.example.lesson_3_safarov.domain.catalog.Product
 
 data class ProductItem(
     val product: Product,
-    val clickListener: (Product) -> Unit
+    val buttonClickListener: (Product) -> Unit,
+    val itemClickListener: (Product) -> Unit
 )
 
 class CatalogViewHolder private constructor(private val binding: CatalogListItemBinding) :
@@ -27,13 +28,13 @@ class CatalogViewHolder private constructor(private val binding: CatalogListItem
         }
     }
 
-    fun bind(item: ProductItem, clickListener: (Product) -> Unit) {
+    fun bind(item: ProductItem) {
         binding.productTitle.text = item.product.title
         binding.productCountry.text = item.product.department
         binding.productPrice.text = item.product.price
-        binding.buyButton.setOnClickListener { clickListener(item.product) }
+        binding.buyButton.setOnClickListener { item.buttonClickListener(item.product) }
 
-        val cornerRadius = this.itemView.resources.getDimension(R.dimen.corner_radius).toInt()
+        val cornerRadius = this.itemView.resources.getDimension(R.dimen.corner_radius_primary).toInt()
         Glide.with(binding.productImage)
             .load(item.product.preview)
             .transform(
@@ -42,7 +43,11 @@ class CatalogViewHolder private constructor(private val binding: CatalogListItem
                     RoundedCorners(cornerRadius)
                 )
             )
-            .placeholder(R.drawable.dallas_cowboys)
+            .placeholder(R.drawable.placeholder_insets)
             .into(binding.productImage)
+
+        binding.root.setOnClickListener {
+            item.itemClickListener(item.product)
+        }
     }
 }
