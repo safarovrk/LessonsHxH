@@ -8,6 +8,7 @@
     <style name="Theme.Lesson_3_Safarov" parent="Base.V27.Theme">
         <item name="android:statusBarColor">@color/black_20pc</item>
         <item name="colorPrimary">@color/smalt</item>
+        <item name="colorAccent">@color/smalt</item>
         <item name="textInputStyle">@style/Theme.Lesson_3_Safarov.TextInputLayout</item>
         <item name="materialButtonStyle">@style/Theme.Lesson_3_Safarov.Button</item>
         <item name="android:windowBackground">@color/background</item>

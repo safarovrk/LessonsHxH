@@ -5,6 +5,8 @@ plugins {
     id("kotlin-android")
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -18,7 +20,38 @@ android {
         versionCode 1
         versionName "1.0"
 
+        signingConfig signingConfigs.debug
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            File releaseSignFile = rootProject.file('release_keystore.properties')
+            if (!releaseSignFile.exists()) {
+                releaseSignFile = rootProject.file('debug_keystore.properties')
+            }
+            Properties releaseSignProperties = new Properties()
+            if (releaseSignFile.exists()) {
+                releaseSignProperties.load(new FileInputStream(releaseSignFile))
+            }
+            storeFile file(releaseSignProperties['keystore'])
+            storePassword releaseSignProperties['storePassword']
+            keyAlias releaseSignProperties['keyAlias']
+            keyPassword releaseSignProperties['keyPassword']
+        }
+
+        debug {
+            File releaseSignFile = rootProject.file('debug_keystore.properties')
+            Properties releaseSignProperties = new Properties()
+            if (releaseSignFile.exists()) {
+                releaseSignProperties.load(new FileInputStream(releaseSignFile))
+            }
+            storeFile file(releaseSignProperties['keystore'])
+            storePassword releaseSignProperties['storePassword']
+            keyAlias releaseSignProperties['keyAlias']
+            keyPassword releaseSignProperties['keyPassword']
+        }
     }
 
     buildTypes {
@@ -27,6 +60,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions = ["version"]
+    productFlavors {
+        app {
+            applicationId "com.example.lesson_3_safarov"
+
+            resValue "string", "app_name", "app_lesson"
+
+            buildConfigField 'String', 'MAPKIT_API_KEY', '"ec64def8-8f36-40eb-adcc-2444e033ef33"'
+
+            dimension "version"
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -35,6 +83,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
@@ -79,4 +128,11 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    implementation platform('com.google.firebase:firebase-bom:32.6.0')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    implementation 'com.yandex.android:maps.mobile:4.4.0-lite'
 }

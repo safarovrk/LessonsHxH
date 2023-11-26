@@ -1,6 +1,7 @@
 package com.example.lesson_3_safarov.di
 
 import com.example.lesson_3_safarov.presentation.ui.catalog.CatalogFragment
+import com.example.lesson_3_safarov.presentation.ui.order.OrderFragment
 import com.example.lesson_3_safarov.presentation.ui.product.ProductFragment
 import com.example.lesson_3_safarov.presentation.ui.product.size.SizeBottomSheetFragment
 import com.example.lesson_3_safarov.presentation.ui.signin.SignInFragment
@@ -20,4 +21,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun sizeBottomSheetFragment(): SizeBottomSheetFragment
+
+    @ContributesAndroidInjector
+    abstract fun orderFragment(): OrderFragment
 }
