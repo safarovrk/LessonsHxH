@@ -17,6 +17,8 @@ import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
 import com.example.lesson_3_safarov.databinding.FragmentCatalogBinding
 import com.example.lesson_3_safarov.domain.catalog.Product
 import com.example.lesson_3_safarov.presentation.exception.getError
+import com.example.lesson_3_safarov.presentation.ui.order.PreOrderProduct
+import com.example.lesson_3_safarov.presentation.ui.product.ProductFragmentDirections
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -88,7 +90,7 @@ class CatalogFragment : Fragment() {
                             ProductItem(
                                 product,
                                 buttonClickListener = {
-                                    /*TODO Будет выполняться при клике на кнопку купить*/
+                                    navigateToOrder(it)
                                 },
                                 itemClickListener = {
                                     navigateToProduct(it)
@@ -116,6 +118,21 @@ class CatalogFragment : Fragment() {
         findNavController().navigate(
             CatalogFragmentDirections.actionCatalogFragmentToProductFragment(
                 product.id, product.title
+            )
+        )
+    }
+
+    private fun navigateToOrder(product: Product) {
+        findNavController().navigate(
+            CatalogFragmentDirections.actionCatalogFragmentToOrderFragment(
+                PreOrderProduct(
+                    id = product.id,
+                    title = product.title,
+                    department = product.department,
+                    price = product.price,
+                    preview = product.preview,
+                    size = "M"
+                )
             )
         )
     }
