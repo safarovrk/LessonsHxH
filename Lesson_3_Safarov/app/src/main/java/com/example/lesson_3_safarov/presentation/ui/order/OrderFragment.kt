@@ -28,6 +28,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.lesson_3_safarov.R
 import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
+import com.example.lesson_3_safarov.data.responsemodel.formatPrice
 import com.example.lesson_3_safarov.databinding.FragmentOrderBinding
 import com.example.lesson_3_safarov.presentation.MapActivity
 import com.example.lesson_3_safarov.presentation.MapActivity.Companion.RESULT_ADDRESS_KEY
@@ -174,6 +175,14 @@ class OrderFragment : Fragment() {
 
         viewModel.counterState.observe(viewLifecycleOwner) { counter ->
             binding.productCounter.text = counter.toString()
+            viewModel.orderState.value?.let { product ->
+                binding.createOrderButton.setText(
+                    requireContext().getString(
+                        R.string.buy_for_price,
+                        (counter * product.getIntPrice()).formatPrice()
+                    )
+                )
+            }
             when (counter) {
                 COUNTER_RANGE.first -> {
                     binding.decreaseCounter.background =

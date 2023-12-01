@@ -11,4 +11,17 @@ data class PreOrderProduct(
     val price: String,
     val preview: String,
     val size: String
-) : Parcelable
+) : Parcelable {
+
+    companion object {
+        private const val CURRENCY_POSTFIX_LENGTH = 1
+    }
+
+    fun getIntPrice(): Int {
+        var stringPrice = this.price
+        stringPrice = stringPrice.replace(" ", "")
+        stringPrice = stringPrice.dropLast(CURRENCY_POSTFIX_LENGTH)
+        return try { stringPrice.toInt() }
+        catch (e: NumberFormatException) { 0 }
+    }
+}
