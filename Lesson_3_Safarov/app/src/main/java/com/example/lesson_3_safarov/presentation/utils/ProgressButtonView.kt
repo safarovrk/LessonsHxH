@@ -13,10 +13,19 @@ class ProgressButtonView @JvmOverloads constructor(
 
     private var binding: ViewLoadableButtonBinding? = null
 
+    private var buttonText = ""
+
     init {
         binding = ViewLoadableButtonBinding.bind(
             LayoutInflater.from(context).inflate(R.layout.view_loadable_button, this, true)
         )
+        val typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.ProgressButtonView, defStyleAttr, 0)
+
+        buttonText = typedArray.getString(R.styleable.ProgressButtonView_text).toString()
+        setText(buttonText)
+
+        typedArray.recycle()
     }
 
     fun setStateLoading() = binding?.run {
@@ -25,8 +34,13 @@ class ProgressButtonView @JvmOverloads constructor(
     }
 
     fun setStateData() = binding?.run {
-        buttonLoadable.text = resources.getText(R.string.sing_in)
+        buttonLoadable.text = buttonText
         progressBar.visibility = GONE
+    }
+
+    fun setText(text: String) = binding?.run {
+        buttonText = text
+        buttonLoadable.text = buttonText
     }
 
     override fun onDetachedFromWindow() {

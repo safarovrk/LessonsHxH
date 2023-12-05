@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.text.toSpannable
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.fragment.app.setFragmentResultListener
@@ -28,6 +29,7 @@ import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
 import com.example.lesson_3_safarov.databinding.FragmentProductBinding
 import com.example.lesson_3_safarov.domain.product.Product
 import com.example.lesson_3_safarov.presentation.exception.getError
+import com.example.lesson_3_safarov.presentation.ui.order.PreOrderProduct
 import com.example.lesson_3_safarov.presentation.ui.product.size.SizeBottomSheetFragment
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -108,6 +110,19 @@ class ProductFragment : Fragment() {
             val result = bundle.getString(SizeBottomSheetFragment.BUNDLE_SIZE_KEY)
             viewModel.currentSelectedSize.value = result
         }
+        binding.productLayout.buyButton.setOnClickListener {
+            if (binding.productLayout.sizeText.text.isNullOrEmpty()) {
+                binding.productLayout.sizeLayout.isErrorEnabled = true
+                binding.productLayout.sizeLayout.error = getString(R.string.input_empty_error)
+            } else {
+                navigateToOrder((viewModel.productState.value as ResponseStates.Success<Product>).data)
+            }
+        }
+        binding.productLayout.sizeText.addTextChangedListener {
+            binding.productLayout.sizeLayout.error = ""
+            binding.productLayout.sizeLayout.isErrorEnabled = false
+        }
+
     }
 
     private fun setStateObserver() {
@@ -213,6 +228,21 @@ class ProductFragment : Fragment() {
             stringBuilder.appendLine(spanString)
         }
         binding.productLayout.detailsText.text = SpannableString(stringBuilder.toSpannable())
+    }
+
+    private fun navigateToOrder(product: Product) {
+        findNavController().navigate(
+            ProductFragmentDirections.actionProductFragmentToOrderFragment(
+                PreOrderProduct(
+                    id = product.id,
+                    title = product.title,
+                    department = product.department,
+                    price = product.price,
+                    preview = product.images[0],
+                    size = viewModel.currentSelectedSize.value.toString()
+                )
+            )
+        )
     }
 
     override fun onDestroy() {

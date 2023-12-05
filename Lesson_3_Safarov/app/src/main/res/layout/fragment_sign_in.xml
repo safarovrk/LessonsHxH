@@ -69,6 +69,7 @@
         android:id="@+id/progressButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:text="@string/sing_in"
         android:layout_marginTop="@dimen/normal_300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

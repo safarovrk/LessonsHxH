@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121670696174",
+    "project_id": "hxh-lesson",
+    "storage_bucket": "hxh-lesson.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121670696174:android:c33bfa5858aab30868c7ff",
+        "android_client_info": {
+          "package_name": "com.example.lesson_3_safarov"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfNo5HBCl7Ivs1cQnWVs0vDZgwBvSvuMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
