@@ -183,39 +183,7 @@ class OrderFragment : Fragment() {
                     )
                 )
             }
-            when (counter) {
-                COUNTER_RANGE.first -> {
-                    binding.decreaseCounter.background =
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.counter_decrease_disable
-                        )
-                }
-
-                COUNTER_RANGE.last -> {
-                    binding.increaseCounter.background =
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.counter_increase_disable
-                        )
-                }
-
-                COUNTER_RANGE.first + 1 -> {
-                    binding.decreaseCounter.background =
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.counter_decrease_enable
-                        )
-                }
-
-                COUNTER_RANGE.last - 1 -> {
-                    binding.increaseCounter.background =
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.counter_increase_enable
-                        )
-                }
-            }
+            updateCounterView(counter)
         }
 
         viewModel.orderCreationResponseState.observe(viewLifecycleOwner) { state ->
@@ -256,6 +224,42 @@ class OrderFragment : Fragment() {
         viewModel.currentDate.observe(viewLifecycleOwner) { date ->
             val dateFormat: DateFormat = SimpleDateFormat(DATE_PATTERN, Locale.getDefault())
             binding.deliveryDateText.setText(dateFormat.format(date))
+        }
+    }
+
+    private fun updateCounterView(counter: Int) {
+        when (counter) {
+            COUNTER_RANGE.first -> {
+                binding.decreaseCounter.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.counter_decrease_disable
+                    )
+            }
+
+            COUNTER_RANGE.last -> {
+                binding.increaseCounter.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.counter_increase_disable
+                    )
+            }
+
+            COUNTER_RANGE.first + 1 -> {
+                binding.decreaseCounter.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.counter_decrease_enable
+                    )
+            }
+
+            COUNTER_RANGE.last - 1 -> {
+                binding.increaseCounter.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.counter_increase_enable
+                    )
+            }
         }
     }
 
