@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_catalogFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
@@ -57,4 +60,23 @@
             android:name="product"
             app:argType="com.example.lesson_3_safarov.presentation.ui.order.PreOrderProduct" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.lesson_3_safarov.presentation.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_occupationBottomSheetFragment"
+            app:destination="@id/occupationBottomSheetFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_photoBottomSheetFragment"
+            app:destination="@id/photoBottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/occupationBottomSheetFragment"
+        android:name="com.example.lesson_3_safarov.presentation.profile.OccupationBottomSheetFragment"
+        android:label="OccupationBottomSheetFragment" />
+    <dialog
+        android:id="@+id/photoBottomSheetFragment"
+        android:name="com.example.lesson_3_safarov.presentation.profile.PhotoBottomSheetFragment"
+        android:label="PhotoBottomSheetFragment" />
 </navigation>

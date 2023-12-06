@@ -1,5 +1,6 @@
 package com.example.lesson_3_safarov.di
 
+import com.example.lesson_3_safarov.presentation.profile.ProfileFragment
 import com.example.lesson_3_safarov.presentation.ui.catalog.CatalogFragment
 import com.example.lesson_3_safarov.presentation.ui.order.OrderFragment
 import com.example.lesson_3_safarov.presentation.ui.product.ProductFragment
@@ -24,4 +25,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun orderFragment(): OrderFragment
+
+    @ContributesAndroidInjector
+    abstract fun profileFragment(): ProfileFragment
 }

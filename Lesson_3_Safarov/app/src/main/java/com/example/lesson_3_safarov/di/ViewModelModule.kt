@@ -2,6 +2,7 @@ package com.example.lesson_3_safarov.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.lesson_3_safarov.presentation.profile.ProfileViewModel
 import com.example.lesson_3_safarov.presentation.ui.catalog.CatalogViewModel
 import com.example.lesson_3_safarov.presentation.ui.order.OrderViewModel
 import com.example.lesson_3_safarov.presentation.ui.product.ProductViewModel
@@ -35,4 +36,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OrderViewModel::class)
     abstract fun orderViewModel(catalogViewModel: OrderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun profileViewModel(profileViewModel: ProfileViewModel): ViewModel
 }

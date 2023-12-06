@@ -62,5 +62,6 @@
     <dimen name="counter_stroke_width">1dp</dimen>
     <dimen name="map_toolbar_padding_vertical">14dp</dimen>
     <dimen name="stroke_merge_negative_margin">-1dp</dimen>
+    <dimen name="profile_photo_size">90dp</dimen>
 
 </resources>
