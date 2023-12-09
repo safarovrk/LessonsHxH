@@ -1,13 +1,10 @@
 package com.example.lesson_3_safarov.presentation.profile
 
 import android.Manifest
-import android.R.attr.data
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -28,10 +25,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.lesson_3_safarov.BuildConfig
 import com.example.lesson_3_safarov.R
 import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
@@ -124,8 +118,20 @@ class ProfileFragment : Fragment() {
         setFragmentResultListener(OccupationBottomSheetFragment.OCCUPATION_KEY) { _, bundle ->
             val result = bundle.getString(OccupationBottomSheetFragment.BUNDLE_OCCUPATION_KEY)
             binding.textOccupation.setText(result)
+            if (result == getString(R.string.other)) {
+                binding.layoutOtherOccupation.visibility = View.VISIBLE
+            } else binding.layoutOtherOccupation.visibility = View.GONE
         }
         binding.textSurname.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE)
+                        as InputMethodManager
+                imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+                binding.layoutSurname.clearFocus()
+                true
+            } else false
+        }
+        binding.textOtherOccupation.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE)
                         as InputMethodManager

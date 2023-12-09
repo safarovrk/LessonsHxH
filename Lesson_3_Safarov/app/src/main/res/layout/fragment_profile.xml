@@ -145,6 +145,26 @@
                     android:longClickable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutOtherOccupation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_200"
+                android:hint="@string/other_occupation"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutOccupation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textOtherOccupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.example.lesson_3_safarov.presentation.utils.ProgressButtonView
                 android:id="@+id/createOrderButton"
                 android:layout_width="0dp"

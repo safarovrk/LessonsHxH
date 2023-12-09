@@ -48,4 +48,5 @@
     <string name="make_a_photo">Сделать снимок</string>
     <string name="img_prefix">JPEG_%1$s_</string>
     <string name="suffix_img">.jpg</string>
+    <string name="other_occupation">Другой род деятельности</string>
 </resources>
