@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -52,13 +53,12 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private var startCameraForResultLauncher: ActivityResultLauncher<Intent>? = null
+    private var startCameraForResultLauncher: ActivityResultLauncher<Uri>? = null
     private var startGalleryForResultLauncher: ActivityResultLauncher<Intent>? = null
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
-                val photoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startCameraForResultLauncher?.launch(photoIntent)
+                setPicture()
             }
         }
     private var savedPhotoPath: String = ""
@@ -162,27 +162,23 @@ class ProfileFragment : Fragment() {
                 requestPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
         } else {
-            val photoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            setPicture()
+        }
+    }
 
-            photoIntent.resolveActivity(requireContext().packageManager)?.also {
-
-                val photoFile: File? = try {
-                    createImageFile()
-                } catch (ex: IOException) {
-                    null
-                }
-
-                photoFile?.also {
-                    val photoURI = FileProvider.getUriForFile(
-                        requireContext(),
-                        BuildConfig.APPLICATION_ID + PROVIDER_PATHS_POSTFIX,
-                        it
-                    )
-                    photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startCameraForResultLauncher?.launch(photoIntent)
-                }
-            }
-
+    private fun setPicture() {
+        val photoFile: File? = try {
+            createImageFile()
+        } catch (ex: IOException) {
+            null
+        }
+        photoFile?.also {
+            val photoURI = FileProvider.getUriForFile(
+                requireContext(),
+                BuildConfig.APPLICATION_ID + PROVIDER_PATHS_POSTFIX,
+                it
+            )
+            startCameraForResultLauncher?.launch(photoURI)
         }
     }
 
@@ -205,9 +201,9 @@ class ProfileFragment : Fragment() {
             }
         }
         startCameraForResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            ActivityResultContracts.TakePicture()
+        ) { isSuccess ->
+            if (isSuccess == true) {
                 Glide.with(requireContext())
                     .load(savedPhotoPath)
                     .transform(CircleCrop())
