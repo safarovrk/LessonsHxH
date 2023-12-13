@@ -7,7 +7,8 @@ import com.example.lesson_3_safarov.data.responsemodel.ResponseLogin
 import com.example.lesson_3_safarov.data.responsemodel.ResponseOrderCreation
 import com.example.lesson_3_safarov.data.responsemodel.toCatalogDomain
 import com.example.lesson_3_safarov.data.responsemodel.toProductDomain
-import okhttp3.Response
+import com.example.lesson_3_safarov.data.responsemodel.toProfileDomain
+import com.example.lesson_3_safarov.domain.profile.Profile
 import java.util.Date
 import com.example.lesson_3_safarov.domain.catalog.Product as CatalogProduct
 import com.example.lesson_3_safarov.domain.product.Product as ProductProduct
@@ -45,5 +46,9 @@ class LessonRepository @Inject constructor(
                 listOf(RequestOrder.ProductsRequest(id, size, quantity))
             )
         ).data
+    }
+
+    suspend fun getProfile(): Profile {
+        return apiLesson.getProfile().data.profile.toProfileDomain()
     }
 }

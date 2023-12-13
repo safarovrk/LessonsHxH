@@ -35,4 +35,18 @@
     <string name="select">Выбрать</string>
     <string name="order_creation_success">Заказ №%1$d от %2$s был успешно оформлен</string>
     <string name="order_creation_error">Во время оформления заказа произошла ошибка</string>
+    <string name="circular_profile_photo">circular_profile_photo</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="occupation">Род деятельности</string>
+    <string name="change">Изменить</string>
+    <string name="developer">Разработчик</string>
+    <string name="tester">Тестировщик</string>
+    <string name="manager">Менеджер</string>
+    <string name="other">Другое</string>
+    <string name="choose_from_gallery">Выбрать из галереи</string>
+    <string name="make_a_photo">Сделать снимок</string>
+    <string name="img_prefix">JPEG_%1$s_</string>
+    <string name="suffix_img">.jpg</string>
+    <string name="other_occupation">Другой род деятельности</string>
 </resources>

@@ -78,6 +78,17 @@ class CatalogFragment : Fragment() {
         binding.errorRefreshButton.setOnClickListener {
             viewModel.onLoadData()
         }
+        binding.materialToolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_profile -> {
+                    findNavController().navigate(
+                        CatalogFragmentDirections.actionCatalogFragmentToProfileFragment()
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setStateObserver() {

@@ -6,6 +6,7 @@ import com.example.lesson_3_safarov.data.responsemodel.BaseResponse
 import com.example.lesson_3_safarov.data.responsemodel.ResponseLogin
 import com.example.lesson_3_safarov.data.responsemodel.ResponseOrderCreation
 import com.example.lesson_3_safarov.data.responsemodel.ResponseProduct
+import com.example.lesson_3_safarov.data.responsemodel.ResponseProfileObject
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -34,4 +35,7 @@ interface ApiLesson {
     suspend fun createOrder(
         @Body requestOrder: RequestOrder
     ): BaseResponse<ResponseOrderCreation>
+
+    @GET("user")
+    suspend fun getProfile(): BaseResponse<ResponseProfileObject>
 }
