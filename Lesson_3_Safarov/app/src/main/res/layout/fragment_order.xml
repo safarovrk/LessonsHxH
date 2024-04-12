@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/smalt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow"
+        app:navigationIconTint="?attr/colorSurface"
+        app:title="@string/placing_an_order"
+        app:titleTextColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="@dimen/product_preview_size"
+        android:layout_height="@dimen/product_preview_size"
+        android:layout_marginStart="@dimen/normal_100"
+        android:layout_marginTop="@dimen/normal_200"
+        android:background="@drawable/rounded_corner_preview"
+        android:contentDescription="@string/product_image_content_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+
+    <TextView
+        android:id="@+id/productTitle"
+        style="@style/TextAppearance.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/normal_100"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/productImage"
+        app:layout_constraintTop_toTopOf="@+id/productImage" />
+
+    <TextView
+        android:id="@+id/productCountry"
+        style="@style/TextAppearance.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/productTitle"
+        app:layout_constraintStart_toStartOf="@+id/productTitle"
+        app:layout_constraintTop_toBottomOf="@+id/productTitle" />
+
+    <TextView
+        android:id="@+id/decreaseCounter"
+        style="@style/TextAppearance.Primary"
+        android:layout_width="@dimen/normal_200"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/stroke_merge_negative_margin"
+        android:background="@drawable/counter_decrease_disable"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingVertical="@dimen/padding_counter_vertical"
+        android:text="@string/minus"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/productCounter"
+        app:layout_constraintEnd_toStartOf="@+id/productCounter"
+        app:layout_constraintTop_toTopOf="@+id/productCounter" />
+
+    <TextView
+        android:id="@+id/productCounter"
+        style="@style/TextAppearance.Primary"
+        android:layout_width="@dimen/normal_300"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/stroke_merge_negative_margin"
+        android:background="@drawable/counter_count_background"
+        android:paddingHorizontal="@dimen/padding_counter_horizontal"
+        android:paddingVertical="@dimen/padding_counter_vertical"
+        android:text="@string/_1"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/increaseCounter"
+        app:layout_constraintEnd_toStartOf="@+id/increaseCounter"
+        app:layout_constraintTop_toTopOf="@+id/increaseCounter" />
+
+    <TextView
+        android:id="@+id/increaseCounter"
+        style="@style/TextAppearance.Primary"
+        android:layout_width="@dimen/normal_200"
+        android:layout_height="wrap_content"
+        android:background="@drawable/counter_increase_enable"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="@dimen/padding_counter_horizontal"
+        android:paddingVertical="@dimen/padding_counter_vertical"
+        android:text="@string/plus"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/productImage"
+        app:layout_constraintEnd_toEndOf="@+id/productTitle" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/houseLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_300"
+        android:hint="@string/House"
+        app:endIconDrawable="@drawable/ic_chevron_right"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="@+id/increaseCounter"
+        app:layout_constraintStart_toStartOf="@id/productImage"
+        app:layout_constraintTop_toBottomOf="@+id/productImage">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/houseText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
+            android:longClickable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/apartmentLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_200"
+        android:hint="@string/apartment"
+        app:layout_constraintEnd_toEndOf="@+id/houseLayout"
+        app:layout_constraintStart_toStartOf="@+id/houseLayout"
+        app:layout_constraintTop_toBottomOf="@+id/houseLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/apartmentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/deliveryDateLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_200"
+        android:hint="@string/delivery_date"
+        app:endIconDrawable="@drawable/ic_chevron_right"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="@+id/apartmentLayout"
+        app:layout_constraintStart_toStartOf="@+id/apartmentLayout"
+        app:layout_constraintTop_toBottomOf="@+id/apartmentLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/deliveryDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusableInTouchMode="false"
+            android:longClickable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.example.lesson_3_safarov.presentation.utils.ProgressButtonView
+        android:id="@+id/createOrderButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/deliveryDateLayout"
+        app:layout_constraintStart_toStartOf="@+id/deliveryDateLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

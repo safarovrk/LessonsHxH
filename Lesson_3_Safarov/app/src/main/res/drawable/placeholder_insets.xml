@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:inset="@dimen/normal_300">
+    <layer-list>
+        <item android:drawable="@drawable/dallas_cowboys" />
+    </layer-list>
+</inset>

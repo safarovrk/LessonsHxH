@@ -1,28 +1,49 @@
 package com.example.lesson_3_safarov.presentation.ui.signin
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.util.Patterns
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.createViewModelLazy
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.lesson_3_safarov.R
+import com.example.lesson_3_safarov.data.responsemodel.ResponseStates
 import com.example.lesson_3_safarov.databinding.FragmentSignInBinding
+import com.example.lesson_3_safarov.presentation.exception.getError
 import com.example.lesson_3_safarov.presentation.utils.SnackbarEvents
 import com.example.lesson_3_safarov.presentation.utils.showStylizedSnackbar
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 
 class SignInFragment : Fragment() {
 
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel by createViewModelLazy(
+        SignInViewModel::class,
+        { this.viewModelStore },
+        factoryProducer = { viewModelFactory })
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,12 +52,40 @@ class SignInFragment : Fragment() {
     ): View {
         _binding = FragmentSignInBinding.inflate(inflater)
         setListeners()
+        setStateObserver()
         return binding.root
     }
 
+    private fun setStateObserver() {
+        viewModel.signInState.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is ResponseStates.Success -> {
+                    binding.progressButton.setStateLoading()
+                    navigateToCatalog()
+                }
+                is ResponseStates.Failure -> {
+                    binding.progressButton.setStateData()
+                    val snackbar = Snackbar.make(binding.root, state.e.getError().toString(), Snackbar.LENGTH_LONG)
+                    requireContext().showStylizedSnackbar(snackbar, SnackbarEvents.ErrorEvent)
+                }
+                is ResponseStates.Loading -> {
+                    binding.progressButton.setStateLoading()
+                }
+            }
+        }
+    }
+
     private fun setListeners() {
-        binding.buttonContainer.setOnClickListener {
+        binding.progressButton.findViewById<MaterialButton>(R.id.buttonLoadable).setOnClickListener {
             signInClicked()
+        }
+        binding.textPassword.addTextChangedListener {
+            binding.layoutPassword.error = ""
+            binding.layoutPassword.isErrorEnabled = false
+        }
+        binding.textLogin.addTextChangedListener {
+            binding.layoutLogin.error = ""
+            binding.layoutLogin.isErrorEnabled = false
         }
         binding.textPassword.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE
@@ -49,9 +98,15 @@ class SignInFragment : Fragment() {
     }
 
     private fun signInClicked() {
+        val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+        binding.layoutLogin.clearFocus()
+        binding.layoutPassword.clearFocus()
+
         var isFieldsValid = true
 
-        if (binding.textLogin.text.isNullOrEmpty()) {
+        if (binding.textLogin.text.isNullOrEmpty()
+            || !Patterns.EMAIL_ADDRESS.matcher(binding.textLogin.text.toString()).matches()) {
             binding.layoutLogin.isErrorEnabled = true
             binding.layoutLogin.error = getString(R.string.input_empty_error)
             isFieldsValid = false
@@ -70,20 +125,10 @@ class SignInFragment : Fragment() {
         }
 
         if (isFieldsValid) {
-            lifecycleScope.launch(Dispatchers.Main) {
-                binding.buttonText.visibility = View.INVISIBLE
-                binding.circularProgressSignIn.visibility = View.VISIBLE
-
-                // Смотрим на индикатор...
-                delay(5000)
-
-                binding.buttonText.visibility = View.VISIBLE
-                binding.circularProgressSignIn.visibility = View.INVISIBLE
-
-                // Заглушка для демонстрации Snackbar
-                val snackbar = Snackbar.make(binding.root, getString(R.string.unknown_error), Snackbar.LENGTH_LONG)
-                requireContext().showStylizedSnackbar(snackbar, SnackbarEvents.ErrorEvent)
-            }
+                viewModel.onSignIn(
+                    binding.textLogin.text.toString(),
+                    binding.textPassword.text.toString()
+                )
         }
     }
 

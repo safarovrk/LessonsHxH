@@ -4,6 +4,7 @@
     <item android:id="@android:id/mask">
         <shape>
             <solid android:color="@color/white" />
+            <corners android:radius="@dimen/corner_radius_primary"/>
         </shape>
     </item>
     <item android:drawable="@drawable/indicator_button_background" />

@@ -1,7 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-kapt")
+    id("kotlin-android")
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -15,7 +20,38 @@ android {
         versionCode 1
         versionName "1.0"
 
+        signingConfig signingConfigs.debug
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            File releaseSignFile = rootProject.file('release_keystore.properties')
+            if (!releaseSignFile.exists()) {
+                releaseSignFile = rootProject.file('debug_keystore.properties')
+            }
+            Properties releaseSignProperties = new Properties()
+            if (releaseSignFile.exists()) {
+                releaseSignProperties.load(new FileInputStream(releaseSignFile))
+            }
+            storeFile file(releaseSignProperties['keystore'])
+            storePassword releaseSignProperties['storePassword']
+            keyAlias releaseSignProperties['keyAlias']
+            keyPassword releaseSignProperties['keyPassword']
+        }
+
+        debug {
+            File releaseSignFile = rootProject.file('debug_keystore.properties')
+            Properties releaseSignProperties = new Properties()
+            if (releaseSignFile.exists()) {
+                releaseSignProperties.load(new FileInputStream(releaseSignFile))
+            }
+            storeFile file(releaseSignProperties['keystore'])
+            storePassword releaseSignProperties['storePassword']
+            keyAlias releaseSignProperties['keyAlias']
+            keyPassword releaseSignProperties['keyPassword']
+        }
     }
 
     buildTypes {
@@ -24,6 +60,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions = ["version"]
+    productFlavors {
+        app {
+            applicationId "com.example.lesson_3_safarov"
+
+            resValue "string", "app_name", "app_lesson"
+
+            buildConfigField 'String', 'MAPKIT_API_KEY', '"ec64def8-8f36-40eb-adcc-2444e033ef33"'
+
+            dimension "version"
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,22 +83,56 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
-    implementation 'androidx.fragment:fragment-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    def nav_version = '2.7.4'
+    def nav_version = '2.7.5'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    def okhttpVersion = "4.11.0"
+    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+
+    def daggerVersion = "2.48.1"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    implementation("com.google.dagger:dagger-android:$daggerVersion")
+    implementation("com.google.dagger:dagger-android-support:$daggerVersion")
+    kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
+    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
+
+    implementation "androidx.security:security-crypto:1.1.0-alpha06"
+
+    debugImplementation "com.github.chuckerteam.chucker:library:4.0.0"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:4.0.0"
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    def roomVersion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    implementation platform('com.google.firebase:firebase-bom:32.6.0')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    implementation 'com.yandex.android:maps.mobile:4.4.0-lite'
 }
